@@ -1,4 +1,0 @@
-repository "FroggerMovement/FroggerMovement@2475895630062@cloud"
-  path "/"
-    br "/main"
-    co "/main"

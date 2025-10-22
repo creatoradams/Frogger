@@ -1,77 +1,71 @@
 using UnityEngine;
+using System.Collections;
+
+// Handles grid-based player movement for Frogger, allowing the player to hop 
+// in four directions using keyboard input with smooth interpolation between positions.
 
 public class FroggerPlayerMovement : MonoBehaviour
 {
-    // [SerializeField] is a special tag that tells Unity to show a private variable in the inspector.
-    // keeps variables protected and prevents other scripts from accidentally changing values they shouldnt.
-    // ofr moveDistance and moveSpeed it allows them to be tweaked inside the Inspector but protected in code.
-    [Header("Movement Settings")]
-    [SerializeField] private float moveDistance = 1f; // How far the frog moves per hop
-    [SerializeField] private float moveSpeed = 5f; // How fast the frog moves
+    private SpriteRenderer spriteRenderer;
+    public Sprite idleSprite;
+    public Sprite leapSprite;
 
-    // Vector3 is a Struct that stores three numbers (X, Y, Z coordinates).
-    private bool isMoving = false; // Prevents input while moving
-    private Vector3 targetPosition; // Where the frog is moving to
-
-    void Start()
+    private void Awake()
     {
-        // Set initial target position to current position
-        targetPosition = transform.position;
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
-
-    void Update()
+    private void Update()
     {
-        // Only accept input if not currently moving
-        if (!isMoving)
+        if (Input.GetKey(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
-            HandleInput();
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            Move(Vector3.up);
         }
-
-        // Move towards target position
-        if (isMoving)
+        else if (Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
-            MoveToTarget();
+            transform.rotation = Quaternion.Euler(0f, 0f, 180f);
+            Move(Vector3.down);
         }
-    }
-
-    void HandleInput()
-    {
-        // Check for arrow key or WASD input
-        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        else if (Input.GetKey(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            StartMove(Vector3.forward); // determines which direction to hop
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
+            Move(Vector3.left);
         }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
-            StartMove(Vector3.back); // determines which direction to hop
-        }
-        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            StartMove(Vector3.left);
-        }
-        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            StartMove(Vector3.right);
+            transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+            Move(Vector3.right);
         }
     }
 
-    void StartMove(Vector3 direction)
+    private void Move(Vector3 direction)
     {
-        // Calculate new target position
-        targetPosition = transform.position + (direction * moveDistance);
-        isMoving = true;
+        // transform.position += direction;
+
+        Vector3 destination = transform.position + direction;
+
+        // Couro
+        StartCoroutine(Leap(destination));
     }
-
-    void MoveToTarget()
+    private IEnumerator Leap(Vector3 destination)
     {
-        // Smoothly move towards target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        Vector3 startPosition = transform.position;
+        float elapsed = 0f;
+        float duration = 0.125f;
 
-        // Check if we've reached the target
-        if (Vector3.Distance(transform.position, targetPosition) < 0.001f)
+        spriteRenderer.sprite = leapSprite;
+
+        while (elapsed < duration)
         {
-            transform.position = targetPosition; // Snap to exact position
-            isMoving = false; // Allow new input
+            float t = elapsed / duration;
+            transform.position = Vector3.Lerp(startPosition, destination, t);
+            elapsed += Time.deltaTime;
+            yield return null;
         }
+
+        transform.position = destination;
+        spriteRenderer.sprite = idleSprite;
     }
+
+    
 }

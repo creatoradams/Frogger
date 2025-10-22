@@ -1543,6 +1543,7 @@ GameObject:
   - component: {fileID: 974711686}
   - component: {fileID: 974711685}
   - component: {fileID: 974711684}
+  - component: {fileID: 974711689}
   m_Layer: 0
   m_Name: FroggerIdle
   m_TagString: Untagged
@@ -1696,6 +1697,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974711689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974711683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d550db21a775b5147b3e82b8c6000a4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FroggerPlayerMovement
+  idleSprite: {fileID: 21300000, guid: accdfca821fcfad4aa0e79fe4138f7df, type: 3}
+  leapSprite: {fileID: 21300000, guid: c032d92b984378d4ebe60f300734cb08, type: 3}
 --- !u!1001 &1178076658
 PrefabInstance:
   m_ObjectHideFlags: 0

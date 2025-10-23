@@ -420,6 +420,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4399483734255617310}
+  - component: {fileID: -3922931056763632456}
   m_Layer: 0
   m_Name: Log 4
   m_TagString: Untagged
@@ -446,6 +447,21 @@ Transform:
   - {fileID: 7689980336432094741}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3922931056763632456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6699823018581923378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07157679200ecd40b7c644da4925d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveCycle
+  direction: {x: 1, y: 0}
+  speed: 2
+  size: 4
 --- !u!1 &8365463417220979936
 GameObject:
   m_ObjectHideFlags: 0

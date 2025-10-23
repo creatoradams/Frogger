@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3107300824400270948}
   - component: {fileID: 5844232168335332893}
+  - component: {fileID: -3867944312322070380}
   m_Layer: 0
   m_Name: Car5
   m_TagString: Untagged
@@ -90,3 +91,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-3867944312322070380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529780414597062297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07157679200ecd40b7c644da4925d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveCycle
+  direction: {x: -1, y: 0}
+  speed: 1
+  size: 2

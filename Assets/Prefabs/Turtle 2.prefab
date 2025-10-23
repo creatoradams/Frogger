@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7800006494326844853}
+  - component: {fileID: 9006010036447919149}
   m_Layer: 0
   m_Name: Turtle 2
   m_TagString: Untagged
@@ -33,6 +34,21 @@ Transform:
   - {fileID: 5325998102354679940}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9006010036447919149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5602371568004139225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07157679200ecd40b7c644da4925d1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveCycle
+  direction: {x: -1, y: 0}
+  speed: 1
+  size: 2
 --- !u!1001 &637539556174547056
 PrefabInstance:
   m_ObjectHideFlags: 0

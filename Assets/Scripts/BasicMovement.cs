@@ -59,7 +59,7 @@ public class FroggerPlayerMovement : MonoBehaviour
         }
 
         // If there is a platform, once frogger makes it to the platform, it needs to move with it
-        if (platform != null && platform == null)
+        if (platform != null)
         {
             transform.SetParent(platform.transform);
         }
@@ -70,7 +70,7 @@ public class FroggerPlayerMovement : MonoBehaviour
         }
 
         // If we move on to an obstacle, frogger dies
-        if (obstacle != null)
+        if (obstacle != null && platform == null)
         {
             // even if the position leads to death, it should be an allowable transition
             transform.position = destination;
@@ -81,8 +81,6 @@ public class FroggerPlayerMovement : MonoBehaviour
             StartCoroutine(Leap(destination));
         }
 
-        // Couro
-        StartCoroutine(Leap(destination));
     }
     private IEnumerator Leap(Vector3 destination)
     {

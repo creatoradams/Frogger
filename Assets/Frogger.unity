@@ -282,6 +282,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 946134605096989913, guid: 344918747a0881041b8a3c9862801422, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509827209869450932, guid: 344918747a0881041b8a3c9862801422, type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7927153657400693376, guid: 344918747a0881041b8a3c9862801422, type: 3}
       propertyPath: m_LocalPosition.x
       value: -5
@@ -1375,7 +1383,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 0.75}
+  m_Size: {x: 1, y: 0.71}
   m_EdgeRadius: 0
 --- !u!1 &845521121
 GameObject:
@@ -1597,7 +1605,7 @@ GameObject:
   - component: {fileID: 974711689}
   m_Layer: 0
   m_Name: FroggerIdle
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3295,6 +3303,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -1020701237036557086, guid: 344918747a0881041b8a3c9862801422, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 627545978099592747, guid: 344918747a0881041b8a3c9862801422, type: 3}
       propertyPath: m_Name
       value: Home

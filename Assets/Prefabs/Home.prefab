@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7927153657400693376}
   - component: {fileID: 5059032333765729601}
   - component: {fileID: 8100819884711129820}
+  - component: {fileID: -1020701237036557086}
   m_Layer: 8
   m_Name: Home
   m_TagString: Untagged
@@ -138,6 +139,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-1020701237036557086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 627545978099592747}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e38d0ba7e014b469a0e36a7698e7a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Home
+  frog: {fileID: 946134605096989913}
 --- !u!1 &946134605096989913
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +163,7 @@ GameObject:
   - component: {fileID: 4134312388007720084}
   - component: {fileID: 6509827209869450932}
   - component: {fileID: 6958126412214101321}
+  - component: {fileID: 409435509454305573}
   m_Layer: 0
   m_Name: HomeFrog
   m_TagString: Untagged
@@ -275,3 +290,16 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &409435509454305573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946134605096989913}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72e38d0ba7e014b469a0e36a7698e7a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Home
+  frog: {fileID: 946134605096989913}

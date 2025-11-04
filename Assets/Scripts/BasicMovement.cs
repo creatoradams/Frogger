@@ -6,16 +6,19 @@ using static UnityEngine.Rendering.DebugUI;
 // Handles grid-based player movement for Frogger, allowing the player to hop 
 // in four directions using keyboard input with smooth interpolation between positions.
 
-public class FroggerPlayerMovement : MonoBehaviour
+public class BasicMovement : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
     public Sprite idleSprite;
     public Sprite leapSprite;
     public Sprite deadSprite;
+    private Vector3 spawnPosition;
+    private float farthestRow;
 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spawnPosition = transform.position;
     }
     private void Update()
     {
@@ -78,6 +81,15 @@ public class FroggerPlayerMovement : MonoBehaviour
         }
         else
         {
+
+            if (destination.y > farthestRow)
+            {
+
+                farthestRow = destination.y;
+                FindObjectOfType<GameManager>().AdvancedRow();
+
+            }
+
             StartCoroutine(Leap(destination));
         }
 
@@ -102,13 +114,32 @@ public class FroggerPlayerMovement : MonoBehaviour
         spriteRenderer.sprite = idleSprite;
     }
 
-    private void Death()
+    public void Death()
     {
+        StopAllCoroutines();
+
         transform.rotation = Quaternion.identity;
         spriteRenderer.sprite = deadSprite;
 
-        // When you die, you shouldn't be able to contorl frogger anymore
+        // When you die, you shouldn't be able to control frogger anymore
         enabled = false;
+
+        FindObjectOfType<GameManager>().Died();
+    }
+
+    public void Respawn()
+    {
+        StopAllCoroutines();
+
+        transform.rotation = Quaternion.identity;
+        transform.position = spawnPosition;
+        farthestRow = spawnPosition.y;
+        spriteRenderer.sprite = idleSprite;
+        gameObject.SetActive(true);
+
+        // Enable frogger
+        enabled = true;
+
     }
 
     // This function gets called when some other collider enters our zone (collision detection)

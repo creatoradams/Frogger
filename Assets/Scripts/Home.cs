@@ -22,7 +22,8 @@ public class Home : MonoBehaviour
         // If Frogger collided with the homebase
         if (other.tag == "Player")
         {
-            enabled = true; 
+            enabled = true;
+            FindObjectOfType<GameManager>().HomeOccupied();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,9 @@ public class GameManager : MonoBehaviour
     private BasicMovement frogger;
     private Home[] homes;
     public GameObject gameOverMenu;
+    public Text scoreText;
+    public Text livesText;
+    public Text timerText;
 
     private int score;
     private int lives;
@@ -67,11 +71,14 @@ public class GameManager : MonoBehaviour
     {
 
         time = duration;
+        //timerText.text = time.ToString();
+
         while (time > 0)
         {
 
             yield return new WaitForSeconds(1);
             time--;
+           // timerText.text = time.ToString();
 
         }
 
@@ -188,6 +195,7 @@ public class GameManager : MonoBehaviour
     {
 
         this.score = score;
+       // scoreText.text = score.ToString();
         // Add UI
 
     }
@@ -196,6 +204,7 @@ public class GameManager : MonoBehaviour
     {
 
         this.lives = lives;
+       // livesText.text = lives.ToString();
         // Add UI
 
     }

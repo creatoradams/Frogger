@@ -60,7 +60,7 @@ public class GameManager : MonoBehaviour
 
     private void Respawn()
     {
-
+        AudioManager.Instance.PlaySound(AudioManager.Instance.respawnSound);
         frogger.Respawn();
         StopAllCoroutines();
         StartCoroutine(Timer(30));
@@ -78,6 +78,11 @@ public class GameManager : MonoBehaviour
 
             yield return new WaitForSeconds(1);
             time--;
+
+            if (time == 10)
+            {
+                AudioManager.Instance.PlaySound(AudioManager.Instance.timeWarningSound);
+            }
            // timerText.text = time.ToString();
 
         }
@@ -109,7 +114,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-
+        AudioManager.Instance.PlayWithDucking(AudioManager.Instance.gameOverSound, 2f);
         frogger.gameObject.SetActive(false);
         gameOverMenu.SetActive(true);
 
@@ -155,11 +160,21 @@ public class GameManager : MonoBehaviour
         int bonusPoints = time * 20;
         SetScore(score + 50 + bonusPoints);
 
+        // Play a different sound if time is left when the frog makes it home
+        if (time >= 20)
+        {
+            AudioManager.Instance.PlayWithDucking(AudioManager.Instance.specialHomeSound);
+        }
+        else
+        {
+            AudioManager.Instance.PlayWithDucking(AudioManager.Instance.homeSound);
+        }
+
         if (Cleared())
         {
-
             SetScore(score + 1000);
             SetLives(lives + 1);
+            AudioManager.Instance.PlayWithDucking(AudioManager.Instance.levelCompletedSound, 2f);
             Invoke(nameof(NewLevel), 1f);
 
         }

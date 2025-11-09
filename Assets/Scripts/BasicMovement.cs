@@ -14,6 +14,7 @@ public class BasicMovement : MonoBehaviour
     public Sprite deadSprite;
     private Vector3 spawnPosition;
     private float farthestRow;
+    private bool diedByWater;
 
     private void Awake()
     {
@@ -77,6 +78,9 @@ public class BasicMovement : MonoBehaviour
         {
             // even if the position leads to death, it should be an allowable transition
             transform.position = destination;
+
+            // Died by road
+            diedByWater = false;
             Death();
         }
         else
@@ -91,6 +95,7 @@ public class BasicMovement : MonoBehaviour
             }
 
             StartCoroutine(Leap(destination));
+            
         }
 
     }
@@ -111,6 +116,7 @@ public class BasicMovement : MonoBehaviour
         }
 
         transform.position = destination;
+        AudioManager.Instance.PlaySound(AudioManager.Instance.hopSound);
         spriteRenderer.sprite = idleSprite;
     }
 
@@ -123,6 +129,16 @@ public class BasicMovement : MonoBehaviour
 
         // When you die, you shouldn't be able to control frogger anymore
         enabled = false;
+
+        // Play death sound depending on death type
+        if (diedByWater)
+        {
+            AudioManager.Instance.PlaySound(AudioManager.Instance.waterDeathSound);
+        }
+        else
+        {
+            AudioManager.Instance.PlaySound(AudioManager.Instance.roadDeathSound);
+        }
 
         FindObjectOfType<GameManager>().Died();
     }
@@ -147,6 +163,8 @@ public class BasicMovement : MonoBehaviour
     {
         if (enabled && other.gameObject.layer == LayerMask.NameToLayer("Obstacle") && transform.parent == null)
         {
+            // Died by water
+            diedByWater = true;
             Death();
         }
     }

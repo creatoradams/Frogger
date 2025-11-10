@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public float sfxVolume = 0.9f;
     public float duckVolume = 0.2f; // temporay lowered volume when SFX plays
 
+    [Header("Audio Sources")]
     public AudioSource sfxSource;
     public AudioSource musicSource;
     public AudioSource uiSource;
@@ -51,19 +52,12 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        // Create separate channels
-        sfxSource = gameObject.AddComponent<AudioSource>();
-        musicSource = gameObject.AddComponent<AudioSource>();
-        uiSource = gameObject.AddComponent<AudioSource>();
-
         // Configure separate channels
         musicSource.loop = true;
         musicSource.volume = musicVolume;
         sfxSource.volume = sfxVolume;
         uiSource.volume = sfxVolume;
 
-       // musicSource.loop = true;
-        //musicSource.volume = 0.5f;
     }
 
     private void Start()
@@ -71,6 +65,8 @@ public class AudioManager : MonoBehaviour
         if (musicEnabled && backgroundMusic != null)
         {
             musicSource.clip = backgroundMusic;
+            musicSource.loop = true;
+            musicSource.volume = musicVolume;
             musicSource.Play();
 
         }
@@ -78,10 +74,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(AudioClip clip)
     {
-        if (clip == null)
-        {
-            sfxSource.PlayOneShot(clip); 
-        }
+        if (clip == null) return;
+        sfxSource.PlayOneShot(clip); 
+        
     }
 
     // For UI or special sounds that should be lowered
@@ -93,10 +88,10 @@ public class AudioManager : MonoBehaviour
 
         // Temporarily reduce background music volume
         if (duckCoroutine != null)
-        {
             StopCoroutine(duckCoroutine);
-            duckCoroutine = StartCoroutine(DuckMusic(duckTime)); 
-        }
+        
+        duckCoroutine = StartCoroutine(DuckMusic(duckTime)); 
+        
     }
     private IEnumerator DuckMusic(float duration)
     {
@@ -138,5 +133,42 @@ public class AudioManager : MonoBehaviour
         sfxSource.pitch = Random.Range(minPitch, maxPitch);
         sfxSource.PlayOneShot(clip);
         sfxSource.pitch = 1f; 
+    }
+
+    // Home sound logic
+    public void PlayHome() => StartCoroutine(PlayHomeSequence(homeSound));
+    public void PlaySpecialHome() => StartCoroutine(PlayHomeSequence(specialHomeSound));
+
+    private IEnumerator PlayHomeSequence(AudioClip clip)
+    {
+        if (clip == null) yield break;
+
+        // Stop background music
+        musicSource.Pause();
+        
+        // Play home music
+        sfxSource.PlayOneShot(clip);
+
+        // Wait for home music to finish
+        yield return new WaitForSeconds(clip.length +0.1f);
+
+        // Unpause music
+        musicSource.UnPause();
+
+    }
+
+    private IEnumerator FadeMusic(float targetVol, float duration)
+    {
+        float startVol = musicSource.volume;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            musicSource.volume = Mathf.Lerp(startVol, targetVol, elapsed /duration);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        musicSource.volume = targetVol;
     }
 }

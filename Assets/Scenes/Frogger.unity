@@ -2028,9 +2028,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   gameOverMenu: {fileID: 1451505132}
-  scoreText: {fileID: 0}
-  livesText: {fileID: 0}
-  timerText: {fileID: 0}
+  scoreText: {fileID: 881140197}
+  livesText: {fileID: 197628055}
+  timerText: {fileID: 191946165}
 --- !u!4 &902664582
 Transform:
   m_ObjectHideFlags: 0

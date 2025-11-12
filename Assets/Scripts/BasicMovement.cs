@@ -15,7 +15,7 @@ public class BasicMovement : MonoBehaviour
     private Vector3 spawnPosition;
     private float farthestRow;
     private bool diedByWater;
-
+    private Collider2D col;
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -104,18 +104,27 @@ public class BasicMovement : MonoBehaviour
         Vector3 startPosition = transform.position;
         float elapsed = 0f;
         float duration = 0.125f;
-
+        var collider = GetComponent<Collider2D>();
+       
         spriteRenderer.sprite = leapSprite;
 
         while (elapsed < duration)
         {
             float t = elapsed / duration;
             transform.position = Vector3.Lerp(startPosition, destination, t);
+            
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         transform.position = destination;
+        bool onPlatform = collider.IsTouchingLayers(LayerMask.GetMask("Platform"));
+        bool inWater = collider.IsTouchingLayers(LayerMask.GetMask("Water"));
+            if (inWater && !onPlatform)
+            {
+                diedByWater = true;
+                Death();
+            }
         AudioManager.Instance.PlaySound(AudioManager.Instance.hopSound);
         spriteRenderer.sprite = idleSprite;
     }

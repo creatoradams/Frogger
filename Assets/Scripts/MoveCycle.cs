@@ -6,7 +6,7 @@ public class MoveCycle : MonoBehaviour
     public Vector2 direction = Vector2.right;
     public float speed = 1f;
     public int size = 1;
-
+    private float baseSpeed;
     private Vector3 leftedge;
     private Vector3 rightedge; 
 
@@ -41,5 +41,15 @@ public class MoveCycle : MonoBehaviour
             // Based on the frame rate of our game, it doesn't vary
             transform.Translate(direction * speed * Time.deltaTime);
         }
+    }
+
+    private void Awake()
+    {
+        baseSpeed = speed; // remember the starting speed
+    }
+
+    public void ResetToBase()
+    {
+        speed = baseSpeed; // restore starter speed for a new game
     }
 }

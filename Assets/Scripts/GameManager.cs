@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI timerText;
-
+    private float speedScale = 1.05f; // increase object speed per level by 5%.
+    private int level = 0;
+    private MoveCycle[] cycles;
     private int score;
     private int lives;
     private int time;
@@ -23,6 +25,8 @@ public class GameManager : MonoBehaviour
         // Will search through scene and return an array
         homes = FindObjectsOfType<Home>();
         frogger = FindObjectOfType<BasicMovement>();
+
+        cycles = FindObjectsOfType<MoveCycle>(true); // initialize the lanes
 
     }
 
@@ -40,8 +44,14 @@ public class GameManager : MonoBehaviour
         gameOverMenu.SetActive(false);
         SetScore(0);
         SetLives(3);
-        NewLevel();
 
+        // reset level and lane speeds
+        level = 0;
+        foreach (var c in cycles)
+        {
+            c.ResetToBase();
+        }
+        NewLevel();
     }
 
     // Maintains score, lives
@@ -55,8 +65,16 @@ public class GameManager : MonoBehaviour
 
         }
 
+        level++;
+        if (level > 1) // make sure we are above the first level
+        {
+            // Increase speed of all lanes
+            foreach (var c in cycles)
+            {
+                c.speed *= speedScale;
+            }
+        }
         Respawn();
-
     }
 
     private void Respawn()

@@ -1024,11 +1024,11 @@ MonoBehaviour:
   gameOverSound: {fileID: 8300000, guid: 103a8417deb8b0e44a5797907aaa620e, type: 3}
   levelCompletedSound: {fileID: 8300000, guid: 3680a4903201110419aadebe0b5766b5, type: 3}
   homeSound: {fileID: 8300000, guid: 04a3614d78003d84ab6b38308c56e883, type: 3}
-  specialHomeSound: {fileID: 0}
+  specialHomeSound: {fileID: 8300000, guid: 04a3614d78003d84ab6b38308c56e883, type: 3}
   backgroundMusic: {fileID: 8300000, guid: cdd67aa1d8efc9145aa6163b90e0edfe, type: 3}
   musicEnabled: 1
   musicVolume: 0.5
-  sfxVolume: 0.9
+  sfxVolume: 0.6
   duckVolume: 0.2
   sfxSource: {fileID: 139975670}
   musicSource: {fileID: 221770759}

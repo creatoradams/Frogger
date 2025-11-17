@@ -49,7 +49,7 @@ public class BasicMovement : MonoBehaviour
     {
         // transform.position += direction;
         Vector3 destination = transform.position + direction;
-
+    
         // Returns a collider if it exists (if this barrier exists, we should prevent movement)
         Collider2D barrier = Physics2D.OverlapBox(destination, Vector2.zero, 0f, LayerMask.GetMask("Barrier"));
         // Returns a collider if it exists (if this platform exists, we should adapt movement)
@@ -133,6 +133,8 @@ public class BasicMovement : MonoBehaviour
     {
         StopAllCoroutines();
 
+        transform.SetParent(null); // debug
+
         transform.rotation = Quaternion.identity;
         spriteRenderer.sprite = deadSprite;
 
@@ -155,6 +157,8 @@ public class BasicMovement : MonoBehaviour
     public void Respawn()
     {
         StopAllCoroutines();
+
+        transform.SetParent(null); // debug
 
         transform.rotation = Quaternion.identity;
         transform.position = spawnPosition;

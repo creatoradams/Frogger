@@ -9,10 +9,12 @@ public class GameManager : MonoBehaviour
     private BasicMovement frogger;
     private Home[] homes;
     public GameObject gameOverMenu;
+    public GameObject levelCompleted;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI timerText;
-    private float speedScale = 1.05f; // increase object speed per level by 5%.
+    public TextMeshProUGUI levelCompletedText;
+    private float speedScale = 1.15f; // increase object speed per level by 15%.
     private int level = 0;
     private MoveCycle[] cycles;
     private int score;
@@ -193,8 +195,9 @@ public class GameManager : MonoBehaviour
         {
             SetScore(score + 1000);
             SetLives(lives + 1);
-            AudioManager.Instance.PlayWithDucking(AudioManager.Instance.levelCompletedSound, 2f);
-            Invoke(nameof(NewLevel), 1f);
+            StartCoroutine(LevelCompletedSequence());
+            //AudioManager.Instance.PlayWithDucking(AudioManager.Instance.levelCompletedSound, 2f);
+            //Invoke(nameof(NewLevel), 1f);
 
         }
         else
@@ -204,6 +207,22 @@ public class GameManager : MonoBehaviour
 
         }
 
+    }
+
+    private IEnumerator LevelCompletedSequence()
+    {
+        // setting text dynamically
+        levelCompletedText.text = "Level " + level + " Completed!";
+
+        levelCompleted.SetActive(true);
+        frogger.gameObject.SetActive(false);
+
+        AudioManager.Instance.PlayWithDucking(AudioManager.Instance.levelCompletedSound, 2f);
+
+        yield return new WaitForSeconds(2f); // show text for 2 seconds
+
+        levelCompleted.SetActive(false);
+        NewLevel();
     }
 
     private bool Cleared()

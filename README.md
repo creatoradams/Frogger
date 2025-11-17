@@ -36,5 +36,9 @@ How To Run The Game | You do NOT need Untiy installed.
 - Extract the zip file
 - Run Frogger.exe
 - Make sure the Frogger_Data folder stays next to the .exe
+
+Kendra Fitzgerald: Project Lead, Developer, Tester
+Nick Adams: Developer, Tester, Design
+Johnathan Church: QA, Developer
   
 

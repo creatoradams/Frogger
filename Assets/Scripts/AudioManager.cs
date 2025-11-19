@@ -100,11 +100,11 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(duration);
         musicSource.volume = originalVol;
     }
-    public void ToggleMusic()
+    public void SetMusicEnabled(bool enabled)
     {
-        musicEnabled= !musicEnabled;
+        musicEnabled = enabled;
 
-        if (musicEnabled)
+        if (enabled)
         {
             musicSource.Play();
         }

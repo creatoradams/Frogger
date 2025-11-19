@@ -20,10 +20,24 @@ public class MenuSystem : MonoBehaviour
 
     private void Start()
     {
-        // Intialize UI (show main menu by default)
         ShowMainMenu();
-        if (musicToggle != null) musicToggle.isOn = AudioManager.Instance.musicEnabled;
-        if (sfxToggle != null) sfxToggle.isOn = true; // default is on
+
+        if (musicToggle != null)
+        {
+            musicToggle.SetIsOnWithoutNotify(AudioManager.Instance.musicEnabled);
+            musicToggle.onValueChanged.AddListener(val => AudioManager.Instance.SetMusicEnabled(val));
+
+        }
+
+        if (sfxToggle != null)
+        {
+            sfxToggle.SetIsOnWithoutNotify(true);
+            sfxToggle.onValueChanged.AddListener(val =>
+            {
+                AudioManager.Instance.sfxSource.mute = !val;
+                AudioManager.Instance.uiSource.mute = !val;
+            });
+        }
     }
 
     private void Update()
@@ -109,7 +123,8 @@ public class MenuSystem : MonoBehaviour
     // Toggles sound effects on/off
     public void ToggleMusic()
     {
-        AudioManager.Instance.ToggleMusic();
+        AudioManager.Instance.SetMusicEnabled(musicToggle.isOn);
+
     }
 
     public void ToggleSFX()

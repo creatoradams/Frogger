@@ -14,8 +14,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI timerText;
     public TextMeshProUGUI levelCompletedText;
-    private float speedScale = 1.15f; // increase object speed per level by 15%.
-    private int level = 0;
+    private float speedScale = 1.25f; // increase object speed per level by 25%
+    int level = 0; 
     private MoveCycle[] cycles;
     private int score;
     private int lives;

@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro; 
+using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -135,6 +136,10 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
+        GameStats.finalScore = score;
+        GameStats.levelsCompleted = level;
+        GameStats.totalDeaths = 3 - lives;
+
         AudioManager.Instance.PlayWithDucking(AudioManager.Instance.gameOverSound, 2f);
         frogger.gameObject.SetActive(false);
         gameOverMenu.SetActive(true);
@@ -146,27 +151,31 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator PlayAgain()
     {
+        bool finished = false;
 
-        bool playAgain = false;
-
-        while (!playAgain)
+        while (!finished)
         {
-
+            // ENTER = restart the game
             if (Input.GetKeyDown(KeyCode.Return))
             {
+                finished = true;
+                NewGame();
+            }
 
-                playAgain = true;
-
+            // Q = go to summary scene
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                finished = true;
+                SceneManager.LoadScene("Summary");
             }
 
             yield return null;
 
         }
 
-        NewGame();
-
     }
 
+   
     public void AdvancedRow()
     {
 

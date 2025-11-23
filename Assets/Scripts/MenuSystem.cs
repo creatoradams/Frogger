@@ -116,7 +116,7 @@ public class MenuSystem : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu"); // create this scene
-    }
+    } 
 
     // SETTINGS
 
@@ -143,4 +143,6 @@ public class MenuSystem : MonoBehaviour
         if (settings != null) settings.SetActive(false);
         if (pause != null) pause.SetActive(false);
     }
+
+   
 }

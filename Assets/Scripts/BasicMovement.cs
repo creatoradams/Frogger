@@ -16,6 +16,7 @@ public class BasicMovement : MonoBehaviour
     private float farthestRow;
     private bool diedByWater;
     private Collider2D col;
+    private bool isMoving = false; 
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -23,22 +24,24 @@ public class BasicMovement : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (!enabled || isMoving) return; // don't accept input while dead or moving
+
+        if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             Move(Vector3.up);
         }
-        else if (Input.GetKey(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 180f);
             Move(Vector3.down);
         }
-        else if (Input.GetKey(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
             Move(Vector3.left);
         }
-        else if (Input.GetKey(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
         {
             transform.rotation = Quaternion.Euler(0f, 0f, -90f);
             Move(Vector3.right);
@@ -47,6 +50,8 @@ public class BasicMovement : MonoBehaviour
 
     private void Move(Vector3 direction)
     {
+        if (isMoving) return; 
+
         // transform.position += direction;
         Vector3 destination = transform.position + direction;
     

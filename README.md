@@ -10,9 +10,10 @@ This project was developed for CSCI: 4490 Software Enginerring | Fall 2025
 
 Features
 
-2 Scenes
+3 Scenes
 - Main Menu
 - Gameplay (Frogger)
+- Summary
 Obstacle Movement
 - Cars
 - Logs

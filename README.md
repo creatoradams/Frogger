@@ -14,14 +14,17 @@ Features
 - Main Menu
 - Gameplay (Frogger)
 - Summary
+  
 Obstacle Movement
 - Cars
 - Logs
 - Lilly Pads
+  
 Custom Audio Manager
 - Background Music
 - Home Music
 - SFX for hops, death, respawn, etc.
+  
 Lives & Scoring System
 Win Detection & Game Over Logic
 Unity Scene Management

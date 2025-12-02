@@ -41,6 +41,15 @@ How To Run The Game | You do NOT need Untiy installed.
 - Run Frogger.exe
 - Make sure the Frogger_Data folder stays next to the .exe
 
+Mac Specific
+- Copy the entire build folder (MacBuild)
+- Open Terminal
+- Drag the built application from the Finder window, and drop it in the Terminal window
+- Type chmod +x (make sure there is a space after +x) and drag the application file into the Terminal window
+- Your command should look like: chmod +x /Users/yourusername/Desktop/YourGame.app.
+- Press ENTER
+- After granting permissions, you should be able to play the game.
+
 Kendra Fitzgerald: Project Lead, Developer, Tester
 Nick Adams: Developer, Tester, Design
 Johnathan Church: QA, Developer
